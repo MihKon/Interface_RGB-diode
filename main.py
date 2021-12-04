@@ -1,5 +1,6 @@
 from tkinter import *
 from functools import partial
+from gpiozero import PWMLED
 
 
 # функции реагирования
@@ -22,16 +23,19 @@ def check_clicked():
 
 def set_color(value, color):
     if color == 'red':
+        red.value = float(value) / 255
         txt_red.config(state='normal')
         txt_red.delete(0, END)
         txt_red.insert(0, value)
         txt_red.config(state='disabled')
     elif color == 'green':
+        green.value = float(value) / 255
         txt_green.config(state='normal')
         txt_green.delete(0, END)
         txt_green.insert(0, value)
         txt_green.config(state='disabled')
     elif color == 'blue':
+        blue.value = float(value) / 255
         txt_blue.config(state='normal')
         txt_blue.delete(0, END)
         txt_blue.insert(0, value)
@@ -40,18 +44,34 @@ def set_color(value, color):
 
 def change_button_color(color):
     if color == 'yellow':
-        print(color)
+        red.value = 1
+        green.value = 1
+        blue.value = 0
     elif color == 'pink':
-        print(color)
+        red.value = 1
+        green.value = 0
+        blue.value = 1
     elif color == 'turquoise':
-        print(color)
+        red.value = 0
+        green.value = 1
+        blue.value = 1
     elif color == 'white':
-        print(color)
+        red.value = 1
+        green.value = 1
+        blue.value = 1
     elif color == 'orange':
-        print(color)
+        red.value = 1
+        green.value = 0.5
+        blue.value = 0
     elif color == 'black':
-        print(color)
+        red.value = 0
+        green.value = 0
+        blue.value = 0
 
+
+red = PWMLED(23)
+green = PWMLED(24)
+blue = PWMLED(25)
 
 # окно приложения
 window = Tk()
@@ -68,13 +88,13 @@ lbl_blue = Label(window, text='BLUE:', font=('Arial Bold', 20), foreground='blue
 lbl_blue.place(x=10, y=169)
 
 # скроллбары изменения цвета
-red_scale = Scale(window, from_=0, to=200, resolution=1,
+red_scale = Scale(window, from_=0, to=255, resolution=1,
                   orient=HORIZONTAL, troughcolor='red', length=200, command=partial(set_color, color='red'))
 red_scale.place(x=200)
-green_scale = Scale(window, from_=0, to=200, resolution=1,
+green_scale = Scale(window, from_=0, to=255, resolution=1,
                     orient=HORIZONTAL, troughcolor='green', length=200, command=partial(set_color, color='green'))
 green_scale.place(x=200, y=80)
-blue_scale = Scale(window, from_=0, to=200, resolution=1,
+blue_scale = Scale(window, from_=0, to=255, resolution=1,
                    orient=HORIZONTAL, troughcolor='blue', length=200, command=partial(set_color, color='blue'))
 blue_scale.place(x=200, y=160)
 
