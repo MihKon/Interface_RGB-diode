@@ -1,9 +1,9 @@
 from tkinter import *
-from tkinter.ttk import Radiobutton
 
+# окно приложения
 window = Tk()
 window.title('Изменение цвета RGB-светодиода')
-window.geometry('600x400')
+window.geometry('540x600')
 window.resizable(width=False, height=False)
 
 # подписи к скроллбарам и текстовым полям
@@ -35,7 +35,36 @@ txt_green.place(x=460, y=180)
 
 # кнопка активации текстового ввода
 state = BooleanVar()
-check = Checkbutton(window, variable=state, text='Выбрать текстовый ввод', font=('Arial Bold', 14))
-check.place(x=10, y=240)
+check = Checkbutton(window, variable=state, text='Выбрать текстовый ввод', font=('Arial Bold', 12))
+check.place(x=200, y=235)
+
+# группа кнопок выбора определённых, заранее заданных цветов
+lbl = Label(window, text='Или выбирете один из готовых:', font=('Arial', 14))
+lbl.place(x=10, y=300)
+btn_yellow = Button(window, text='Жёлтый', bg='yellow', bd=1,
+                    height=3, width=10, font=('Arial Bold', 14),
+                    activebackground='yellow', relief=RIDGE)
+btn_yellow.place(x=10, y=350)
+btn_pink = Button(window, text='Розовый', bg='#E6399B', bd=1,
+                  height=3, width=10, font=('Arial Bold', 14),
+                  activebackground='#E6399B', relief=RIDGE)
+btn_pink.place(x=210, y=350)
+btn_turquoise = Button(window, text='Бирюзовый', bg='#33CCCC', bd=1,
+                       height=3, width=10, font=('Arial Bold', 14),
+                       activebackground='#33CCCC', relief=RIDGE)
+btn_turquoise.place(x=410, y=350)
+btn_white = Button(window, text='Белый', bg='white', bd=1,
+                   height=3, width=10, font=('Arial Bold', 14),
+                   activebackground='white', relief=RIDGE)
+btn_white.place(x=210, y=500)
+btn_orange = Button(window, text='Оранжевый', bg='orange', bd=1,
+                    height=3, width=10, font=('Arial Bold', 14),
+                    activebackground='orange', relief=RIDGE)
+btn_orange.place(x=10, y=500)
+btn_black = Button(window, text='Чёрный', bg='black', bd=1,
+                   height=3, width=10, font=('Arial Bold', 14),
+                   activebackground='black', relief=RIDGE,
+                   activeforeground='white', fg='white')
+btn_black.place(x=410, y=500)
 
 window.mainloop()
