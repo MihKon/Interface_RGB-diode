@@ -10,6 +10,7 @@ def check_clicked():
         txt_red.config(state='normal')
         txt_blue.config(state='normal')
         txt_green.config(state='normal')
+        btn_ok.config(state='normal')
         red_scale.config(state='disabled')
         blue_scale.config(state='disabled')
         green_scale.config(state='disabled')
@@ -17,6 +18,7 @@ def check_clicked():
         txt_red.config(state='disabled')
         txt_blue.config(state='disabled')
         txt_green.config(state='disabled')
+        btn_ok.config(state='disabled')
         red_scale.config(state='normal')
         blue_scale.config(state='normal')
         green_scale.config(state='normal')
@@ -80,6 +82,8 @@ def clicked():
     else:
         if red_val_fr_txt > 255 or green_val_fr_txt > 255 or blue_val_fr_txt > 255:
             messagebox.showwarning('Предупреждение', 'Вводимые значения должны быть в диапазоне от 0 до 255')
+        elif red_val_fr_txt < 0 or green_val_fr_txt < 0 or blue_val_fr_txt < 0:
+            messagebox.showwarning('Предупреждение', 'Вводимые значения должны быть в диапазоне от 0 до 255')
         else:
             red.value = red_val_fr_txt / 255
             green.value = green_val_fr_txt / 255
@@ -122,7 +126,7 @@ txt_green = Entry(window, width=10, state='disabled')
 txt_green.place(x=460, y=100)
 txt_blue = Entry(window, width=10, state='disabled')
 txt_blue.place(x=460, y=180)
-btn_ok = Button(window, text="Ввести", font=('Arial', 12), command=clicked)
+btn_ok = Button(window, text="Ввести", font=('Arial', 12), command=clicked, stat='disabled')
 btn_ok.place(x=300, y=235)
 
 # кнопка активации текстового ввода
