@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 from functools import partial
 from gpiozero import PWMLED
 
@@ -69,6 +70,22 @@ def change_button_color(color):
         blue.value = 0
 
 
+def clicked():
+    try:
+        red_val_fr_txt = float(txt_red.get())
+        green_val_fr_txt = float(txt_green.get())
+        blue_val_fr_txt = float(txt_blue.get())
+    except ValueError:
+        messagebox.showerror('Ошибка', 'Вы ввели неверные значения!')
+    else:
+        if red_val_fr_txt > 255 or green_val_fr_txt > 255 or blue_val_fr_txt > 255:
+            messagebox.showwarning('Предупреждение', 'Вводимые значения должны быть в диапазоне от 0 до 255')
+        else:
+            red.value = red_val_fr_txt / 255
+            green.value = green_val_fr_txt / 255
+            blue.value = blue_val_fr_txt / 255
+
+
 red = PWMLED(23)
 green = PWMLED(24)
 blue = PWMLED(25)
@@ -76,7 +93,7 @@ blue = PWMLED(25)
 # окно приложения
 window = Tk()
 window.title('Изменение цвета RGB-светодиода')
-window.geometry('540x600')
+window.geometry('600x600')
 window.resizable(width=False, height=False)
 
 # подписи к скроллбарам и текстовым полям
@@ -105,6 +122,8 @@ txt_green = Entry(window, width=10, state='disabled')
 txt_green.place(x=460, y=100)
 txt_blue = Entry(window, width=10, state='disabled')
 txt_blue.place(x=460, y=180)
+btn_ok = Button(window, text="Ввести", font=('Arial', 12), command=clicked)
+btn_ok.place(x=300, y=235)
 
 # кнопка активации текстового ввода
 state = BooleanVar()
@@ -113,7 +132,7 @@ check = Checkbutton(window, variable=state, text='Выбрать текстов�
 check.place(x=200, y=235)
 
 # группа кнопок выбора определённых, заранее заданных цветов
-lbl = Label(window, text='Или выбирете один из готовых:', font=('Arial', 14))
+lbl = Label(window, text='Или выберете один из готовых:', font=('Arial', 14))
 lbl.place(x=10, y=300)
 btn_yellow = Button(window, text='Жёлтый', bg='yellow', bd=1,
                     height=3, width=10, font=('Arial Bold', 14),
