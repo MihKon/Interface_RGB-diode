@@ -126,7 +126,7 @@ txt_green = Entry(window, width=10, state='disabled')
 txt_green.place(x=460, y=100)
 txt_blue = Entry(window, width=10, state='disabled')
 txt_blue.place(x=460, y=180)
-btn_ok = Button(window, text="Ввести", font=('Arial', 12), command=clicked, stat='disabled')
+btn_ok = Button(window, text="Ввести", font=('Arial', 12), command=clicked, state='disabled')
 btn_ok.place(x=460, y=235)
 
 # кнопка активации текстового ввода
